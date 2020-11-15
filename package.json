@@ -1,13 +1,13 @@
 {
-  "name": "helioslauncher",
+  "name": "fridaythe13thlauncher",
   "version": "1.8.0",
-  "productName": "Helios Launcher",
-  "description": "Modded Minecraft Launcher",
-  "author": "Daniel Scalzi (https://github.com/dscalzi/)",
+  "productName": "Friday the 13th Launcher",
+  "description": "Le launcher de mon serveur Minecraft",
+  "author": "Daniel Scalzi (https://github.com/dscalzi/) et OrgeAlexj06",
   "license": "UNLICENSED",
-  "homepage": "https://github.com/dscalzi/HeliosLauncher",
+  "homepage": "https://github.com/OrgeAlexj06/Friday-the-13th-Launcher",
   "bugs": {
-    "url": "https://github.com/dscalzi/HeliosLauncher/issues"
+    "url": "https://github.com/OrgeAlexj06/Friday-the-13th-Launcher/issues"
   },
   "private": true,
   "main": "index.js",
@@ -47,6 +47,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dscalzi/HeliosLauncher.git"
+    "url": "git+https://github.com/OrgeAlexj06/Friday-the-13th-Launcher.git"
   }
 }
