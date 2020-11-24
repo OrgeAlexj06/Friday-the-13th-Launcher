@@ -237,7 +237,7 @@ const refreshServerStatus = async function(fade = false){
         }
 
     } catch (err) {
-        loggerLanding.warn('Unable to refresh server status, assuming offline.')
+        loggerLanding.warn('Impossible d actualiser l état du serveur, en supposant qu il est hors ligne.')
         loggerLanding.debug(err)
     }
     if(fade){
@@ -292,7 +292,7 @@ let extractListener
  */
 function asyncSystemScan(mcVersion, launchAfter = true){
 
-    setLaunchDetails('Please wait..')
+    setLaunchDetails('Veuillez patienter...')
     toggleLaunchArea(true)
     setLaunchPercentage(0, 100)
 
@@ -494,7 +494,7 @@ function dlAsync(login = true){
         }
     }
 
-    setLaunchDetails('Please wait..')
+    setLaunchDetails('Veuillez patienter...')
     toggleLaunchArea(true)
     setLaunchPercentage(0, 100)
 
@@ -524,8 +524,8 @@ function dlAsync(login = true){
         loggerAEx.log(data)
     })
     aEx.on('error', (err) => {
-        loggerLaunchSuite.error('Error during launch', err)
-        showLaunchFailure('Error During Launch', err.message || 'See console (CTRL + Shift + i) for more details.')
+        loggerLaunchSuite.error('Erreur durant le lancement', err)
+        showLaunchFailure('Erreur durant le lancement', err.message || 'Regarder la cosole (CTRL + Shift + i) pour plus de détails.')
     })
     aEx.on('close', (code, signal) => {
         if(code !== 0){
@@ -541,28 +541,28 @@ function dlAsync(login = true){
             switch(m.data){
                 case 'distribution':
                     setLaunchPercentage(20, 100)
-                    loggerLaunchSuite.log('Validated distibution index.')
-                    setLaunchDetails('Loading version information..')
+                    loggerLaunchSuite.log('Validation de l index de distribution.')
+                    setLaunchDetails('Chargement des informations de version...')
                     break
                 case 'version':
                     setLaunchPercentage(40, 100)
                     loggerLaunchSuite.log('Version data loaded.')
-                    setLaunchDetails('Validating asset integrity..')
+                    setLaunchDetails('Valider l intégrité des actifs...')
                     break
                 case 'assets':
                     setLaunchPercentage(60, 100)
                     loggerLaunchSuite.log('Asset Validation Complete')
-                    setLaunchDetails('Validating library integrity..')
+                    setLaunchDetails('Validation de l intégrité de la bibliothèque...')
                     break
                 case 'libraries':
                     setLaunchPercentage(80, 100)
                     loggerLaunchSuite.log('Library validation complete.')
-                    setLaunchDetails('Validating miscellaneous file integrity..')
+                    setLaunchDetails('Validation de l intégrité des fichiers divers...')
                     break
                 case 'files':
                     setLaunchPercentage(100, 100)
                     loggerLaunchSuite.log('File validation complete.')
-                    setLaunchDetails('Downloading files..')
+                    setLaunchDetails('Téléchargement des fichiers...')
                     break
             }
         } else if(m.context === 'progress'){
@@ -604,7 +604,7 @@ function dlAsync(login = true){
                         progressListener = null
                     }
 
-                    setLaunchDetails('Preparing to launch..')
+                    setLaunchDetails('Préparation du lancement...')
                     break
             }
         } else if(m.context === 'error'){
@@ -651,7 +651,7 @@ function dlAsync(login = true){
                 const authUser = ConfigManager.getSelectedAccount()
                 loggerLaunchSuite.log(`Sending selected account (${authUser.displayName}) to ProcessBuilder.`)
                 let pb = new ProcessBuilder(serv, versionData, forgeData, authUser, remote.app.getVersion())
-                setLaunchDetails('Launching game..')
+                setLaunchDetails('Lancement du jeu...')
 
                 // const SERVER_JOINED_REGEX = /\[.+\]: \[CHAT\] [a-zA-Z0-9_]{1,16} joined the game/
                 const SERVER_JOINED_REGEX = new RegExp(`\\[.+\\]: \\[CHAT\\] ${authUser.displayName} joined the game`)
@@ -659,7 +659,7 @@ function dlAsync(login = true){
                 const onLoadComplete = () => {
                     toggleLaunchArea(false)
                     if(hasRPC){
-                        DiscordWrapper.updateDetails('Loading game..')
+                        DiscordWrapper.updateDetails('Chargement du jeu...')
                     }
                     proc.stdout.on('data', gameStateChange)
                     proc.stdout.removeListener('data', tempListener)
@@ -708,7 +708,7 @@ function dlAsync(login = true){
                     proc.stdout.on('data', tempListener)
                     proc.stderr.on('data', gameErrorListener)
 
-                    setLaunchDetails('Done. Enjoy the server!')
+                    setLaunchDetails('Le jeu à été lancer !')
 
                     // Init Discord Hook
                     const distro = DistroManager.getDistribution()
@@ -740,7 +740,7 @@ function dlAsync(login = true){
     // Begin Validations
 
     // Validate Forge files.
-    setLaunchDetails('Loading server information..')
+    setLaunchDetails('Chargement des informations du serveur...')
 
     refreshDistributionIndex(true, (data) => {
         onDistroRefresh(data)
@@ -867,7 +867,7 @@ let newsLoadingListener = null
  */
 function setNewsLoading(val){
     if(val){
-        const nLStr = 'Checking for News'
+        const nLStr = 'Recherche de mise à jour'
         let dotStr = '..'
         nELoadSpan.innerHTML = nLStr + dotStr
         newsLoadingListener = setInterval(() => {

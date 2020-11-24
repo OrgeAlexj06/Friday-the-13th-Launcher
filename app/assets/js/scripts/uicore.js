@@ -41,11 +41,11 @@ if(!isDev){
     ipcRenderer.on('autoUpdateNotification', (event, arg, info) => {
         switch(arg){
             case 'checking-for-update':
-                loggerAutoUpdater.log('Checking for update..')
-                settingsUpdateButtonStatus('Checking for Updates..', true)
+                loggerAutoUpdater.log('Vérification des mise à jour...')
+                settingsUpdateButtonStatus('Recherche de mise à jour...', true)
                 break
             case 'update-available':
-                loggerAutoUpdaterSuccess.log('New update available', info.version)
+                loggerAutoUpdaterSuccess.log('Nouvelle mise à jour disponible', info.version)
                 
                 if(process.platform === 'darwin'){
                     info.darwindownload = `https://github.com/dscalzi/HeliosLauncher/releases/download/v${info.version}/helioslauncher-setup-${info.version}.dmg`
@@ -55,8 +55,8 @@ if(!isDev){
                 populateSettingsUpdateInformation(info)
                 break
             case 'update-downloaded':
-                loggerAutoUpdaterSuccess.log('Update ' + info.version + ' ready to be installed.')
-                settingsUpdateButtonStatus('Install Now', false, () => {
+                loggerAutoUpdaterSuccess.log('La mise à jour ' + info.version + ' est prêt à être installer.')
+                settingsUpdateButtonStatus('Installer maintenant', false, () => {
                     if(!isDev){
                         ipcRenderer.send('autoUpdateAction', 'installUpdateNow')
                     }
@@ -64,8 +64,8 @@ if(!isDev){
                 showUpdateUI(info)
                 break
             case 'update-not-available':
-                loggerAutoUpdater.log('No new update found.')
-                settingsUpdateButtonStatus('Check for Updates')
+                loggerAutoUpdater.log('Aucune nouvelle mise à jour trouvée.')
+                settingsUpdateButtonStatus('Recherche de mise à jour')
                 break
             case 'ready':
                 updateCheckListener = setInterval(() => {
